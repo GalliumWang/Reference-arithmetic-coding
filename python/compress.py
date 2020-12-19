@@ -1,24 +1,24 @@
 
 import contextlib, sys
-import arithmeticcoding
+import tool
 
 
 def main(args):
 	
 	if len(args) != 2:
-		sys.exit("Usage: python adaptive-arithmetic-compress.py InputFile OutputFile")
+		sys.exit("Usage: python compress.py InputFile OutputFile")
 	inputfile, outputfile = args
 	
 	
 	with open(inputfile, "rb") as inp, \
-			contextlib.closing(arithmeticcoding.BitOutputStream(open(outputfile, "wb"))) as bitout:
+			contextlib.closing(tool.BitOutputStream(open(outputfile, "wb"))) as bitout:
 		compress(inp, bitout)
 
 
 def compress(inp, bitout):
-	initfreqs = arithmeticcoding.FlatFrequencyTable(257)
-	freqs = arithmeticcoding.SimpleFrequencyTable(initfreqs)
-	enc = arithmeticcoding.ArithmeticEncoder(32, bitout)
+	initfreqs = tool.FlatFrequencyTable(257)
+	freqs = tool.SimpleFrequencyTable(initfreqs)
+	enc = tool.ArithmeticEncoder(32, bitout)
 	while True:
 		
 		symbol = inp.read(1)
