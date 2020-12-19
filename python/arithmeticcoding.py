@@ -137,7 +137,7 @@ class ArithmeticEncoder(ArithmeticCoderBase):
 	# It is important that this method must be called at the end of the each encoding process.
 	# Note that this method merely writes data to the underlying output stream but does not close it.
 	def finish(self):
-		self.output.write(1)
+		self.output.write(1)	#TODO
 	
 	
 	def shift(self):
@@ -342,15 +342,12 @@ class SimpleFrequencyTable(FrequencyTable):
 		else:  # Assume it is a sequence type
 			self.frequencies = list(freqs)  # Make copy
 		
-		# 'frequencies' is a list of the frequency for each symbol.
-		# Its length is at least 1, and each element is non-negative.
 		if len(self.frequencies) < 1:
 			raise ValueError("At least 1 symbol needed")
 		for freq in self.frequencies:
 			if freq < 0:
 				raise ValueError("Negative frequency")
 		
-		# Always equal to the sum of 'frequencies'
 		self.total = sum(self.frequencies)
 		
 		# cumulative[i] is the sum of 'frequencies' from 0 (inclusive) to i (exclusive).
