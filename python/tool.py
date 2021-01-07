@@ -1,3 +1,10 @@
+import os
+
+def get_compress_rate(original: str, processed: str) -> float:
+    originalSize = os.path.getsize(original)
+    finalSize = os.path.getsize(processed)
+    return finalSize / originalSize
+
 class ArithmeticCoderBase:
 	def __init__(self, numbits):
 		if numbits < 1:
@@ -71,19 +78,12 @@ class ArithmeticEncoder(ArithmeticCoderBase):
 		self.output = bitout
 		
 		self.num_underflow = 0
-	
-	
-	
-	
+
 	def write(self, freqs, symbol):
 		if not isinstance(freqs, CheckedFrequencyTable):
 			freqs = CheckedFrequencyTable(freqs)
 		self.update(freqs, symbol)
-	
-	
-	
-	
-	
+
 	def finish(self):
 		self.output.write(1)	
 	
