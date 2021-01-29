@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/main.css">
+    <title>信息论实验</title>
+</head>
+<body style="background-color:#F3E0D9;">
+    <nav id="overlay">
+        <img src="images/close.png" class="close-btn" id="close-menu">
+        <ul>
+            <li>
+                <a id="lzw-text" href="#">LZW 编码</a>
+                <input type="radio" id="lzw" name="choice">
+
+            </li>
+            <li>
+                <a id="arith-text" href="#">算术编码</a>
+                <input type="radio" id="arith" name="choice">
+            </li>
+        </ul>
+        
+        <div class="for-text">
+            <textarea id="old-text" rows="10" cols="50" placeholder="请输入待编码内容"></textarea>
+            <textarea id="new-text" rows="10" cols="50" placeholder="请输入待解码内容"></textarea>
+    
+        </div>
+
+        <div class="for-bnt">
+            <button id="encode">编码</button>
+            <button id="decode">解码</button>
+        </div>
+
+    </nav>
+
+    <header>
+        <a href="#" class="logo">
+            Infomation Theory Lab
+        </a>
+        <img src="images/menu.png" id="open-menu" class="menu-btn">
+    </header>
+    <section>
+        <h1>信息论实验</h1>
+        <img src="images/main.png">
+    </section>
+
+    <script>
+        var overlay=document.getElementById('overlay');
+        var closeMenu=document.getElementById('close-menu');
+        document.getElementById('open-menu').addEventListener('click',function(){
+            overlay.classList.remove('show-menu-close');
+            overlay.classList.add('show-menu');
+        });
+
+        document.getElementById('close-menu').addEventListener('click',function(){
+            overlay.classList.remove('show-menu');
+            overlay.classList.add('show-menu-close');
+        });
+
+        document.getElementById('lzw-text').addEventListener('click',function(){
+            document.getElementById('lzw').checked=true;
+            });
+
+        document.getElementById('arith-text').addEventListener('click',function(){
+            document.getElementById('arith').checked=true;
+            });
+
+    </script>
+
+    <script>
+        document.getElementById("lzw").checked=true;
+        // LZW-compress a string
+        function lzw_encode(s) {
+            var dict = {};
+            var data = (s + "").split("");
+            var out = [];
+            var currChar;
+            var phrase = data[0];
+            var code = 256;
+            for (var i=1; i<data.length; i++) {
+                currChar=data[i];
+                if (dict[phrase + currChar] != null) {
+                    phrase += currChar;
+                }
+                else {
+                    out.push(phrase.length > 1 ? dict[phrase] : phrase.charCodeAt(0));
+                    dict[phrase + currChar] = code;
+                    code++;
+                    phrase=currChar;
+                }
+            }
+            out.push(phrase.length > 1 ? dict[phrase] : phrase.charCodeAt(0));
+            for (var i=0; i<out.length; i++) {
+                out[i] = String.fromCharCode(out[i]);
+            }
+            return out.join("");
+        }
+
+        // Decompress an LZW-encoded string
+        function lzw_decode(s) {
+            var dict = {};
+            var data = (s + "").split("");
+            var currChar = data[0];
+            var oldPhrase = currChar;
+            var out = [currChar];
+            var code = 256;
+            var phrase;
+            for (var i=1; i<data.length; i++) {
+                var currCode = data[i].charCodeAt(0);
+                if (currCode < 256) {
+                    phrase = data[i];
+                }
+                else {
+                phrase = dict[currCode] ? dict[currCode] : (oldPhrase + currChar);
+                }
+                out.push(phrase);
+                currChar = phrase.charAt(0);
+                dict[code] = oldPhrase + currChar;
+                code++;
+                oldPhrase = phrase;
+            }
+            return out.join("");
+        }
+    </script>
+
+    <script>
+        document.getElementById('encode').addEventListener('click',function(){
+            var method=1
+            if(document.getElementById('arith').checked==true){
+                method=2;
+            }
+
+            if(method==1){
+                originText=document.getElementById('old-text').value;
+                encodedText=lzw_encode(originText);
+                document.getElementById('new-text').value=encodedText;
+            }
+
+            });
+
+            document.getElementById('decode').addEventListener('click',function(){
+            var method=1
+            if(document.getElementById('arith').checked==true){
+                method=2;
+            }
+
+            if(method==1){
+                originText=document.getElementById('new-text').value;
+                decodedText=lzw_decode(originText);
+                document.getElementById('old-text').value=decodedText;
+            }
+
+            });
+    </script>
+    
+</body>
+</html>

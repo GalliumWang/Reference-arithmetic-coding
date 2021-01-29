@@ -1,0 +1,259 @@
+body,html{
+    margin: 0;
+    a{
+        text-decoration: none;
+    }
+
+
+}
+
+
+header{
+    padding: 1em;
+
+    .logo{
+        color: black;
+        font-weight: bold;
+        font-size: 2.2em;
+    }
+    .menu-btn{
+        width: 46px;
+        float: right;
+        cursor: pointer;
+    }
+}
+
+section{
+    padding: 4em;
+    h1{
+        font-size: 5em;
+        font-weight: lighter;
+        margin-top: 5%;
+        margin-left: calc(50vw - 3.5em);
+    }
+    img{
+        width: 650px;
+        margin-top: 1em;
+        margin-left: calc(50vw - 400px);
+    }
+
+
+}
+
+nav{
+    display: block;
+    position: absolute;
+    padding: 2em;
+    background: #BCC0E8;
+    width: calc(100% - 4em);
+    height: calc(100vh - 4em);
+    transform: scaleX(0);
+    transform-origin: right;
+    .close-btn{
+        width: 46px;
+        float: right;
+        cursor: pointer;
+        opacity: 0;
+    }
+
+    ul{
+        list-style-type: none;
+        margin: 5% auto 0 calc(50vw - 310px);
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(2,50%);
+        width: 25%;
+        text-align: center;
+
+        a{
+            color: black;
+            font-weight: bold;
+            font-size: 1.4em;
+        }
+        // span{
+        //     color: gray;
+        //     display: block;
+        //     font-size: .75em;
+        //     margin-top: 20px;
+        // }
+        input{
+            display: inline;
+        }
+        li{
+            opacity: 0;
+        }
+    }
+
+    textarea{
+        opacity: 0;
+    }
+
+    button{
+        opacity: 0;
+    }
+}
+
+.show-menu{
+    display: block;
+    animation: slide-menu 1s ease-in forwards;
+    .close-btn{
+        animation: show-x 1s 1s forwards;
+    }
+
+    li:nth-of-type(1){
+        animation: menu-item-anim .6s 1s forwards ease-in-out;
+    }
+
+    li:nth-of-type(2){
+        animation: menu-item-anim .6s 1.2s forwards ease-in-out;
+    }
+
+    textarea:nth-of-type(1){
+        animation: menu-item-anim .6s 1s forwards ease-in-out;
+    }
+
+    textarea:nth-of-type(2){
+        animation: menu-item-anim .6s 1.2s forwards ease-in-out;
+    }
+
+    button:nth-of-type(1){
+        animation: menu-item-anim .6s 1s forwards ease-in-out;
+    }
+
+    button:nth-of-type(2){
+        animation: menu-item-anim .6s 1.2s forwards ease-in-out;
+    }
+
+}
+
+@keyframes slide-menu{
+    from{
+        transform: scaleX(0);
+    }
+    to{
+        transform: scaleX(1);
+    }
+
+}
+
+@keyframes show-x{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+@keyframes menu-item-anim{
+    from{
+        transform:translateY(30%)
+    }
+    to{
+        transform:translateY(0);
+        opacity: 1;
+    }
+}
+
+
+
+
+.show-menu-close{
+    display: block;
+    transform: scaleX(1);
+    animation: slide-menu-close 0.6s 0.8s ease-in forwards;
+    .close-btn{
+        animation: show-x-close 1s forwards;
+    }
+
+    li:nth-of-type(1){
+        animation: menu-item-anim-close 1.2s forwards ease-in-out;
+    }
+
+    li:nth-of-type(2){
+        animation: menu-item-anim-close 0.8s forwards ease-in-out;
+    }
+
+    textarea:nth-of-type(1){
+        animation: menu-item-anim-close 1.2s forwards ease-in-out;
+    }
+
+    textarea:nth-of-type(2){
+        animation: menu-item-anim-close 0.8s forwards ease-in-out;
+    }
+
+    button:nth-of-type(1){
+        animation: menu-item-anim-close 1.2s forwards ease-in-out;
+    }
+
+    button:nth-of-type(2){
+        animation: menu-item-anim-close 0.8s forwards ease-in-out;
+    }
+
+}
+
+@keyframes slide-menu-close{
+    from{
+        transform: scaleX(1);
+        opacity: 1;
+    }
+    to{
+        transform: scaleX(0);
+        opacity: 0;
+    }
+
+}
+
+@keyframes show-x-close{
+    from{
+        opacity: 1;
+    }
+    to{
+        opacity: 0;
+    }
+}
+
+@keyframes menu-item-anim-close{
+    from{
+        transform:translateY(0);
+        opacity: 1;
+    }
+    to{
+        transform:translateY(80px);
+        opacity: 0;
+    }
+}
+
+
+
+
+
+.for-text{
+    margin: 2.5em auto;
+    width: 80%;
+    textarea:nth-of-type(1){
+        font-size: 1.7em;
+        margin: auto 2em auto 50px;
+    }
+
+    textarea:nth-of-type(2){
+        font-size: 1.7em;
+        margin: auto auto auto auto;
+    }
+
+}
+
+.for-bnt{
+    margin: 4em auto;
+    width: 80%;
+    button:nth-of-type(1){
+        margin: auto 1.5em auto calc(50vw - 12em);
+        font-size: 30px;
+    }
+
+    button:nth-of-type(2){
+        margin: auto auto auto auto;
+        font-size: 30px;
+    }
+
+}
